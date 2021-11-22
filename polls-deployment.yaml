@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+  labels:
+    app: inventory
+spec:
+    replicas: 2
+  selector:
+    matchLabels:
+      app: inventory
+  template:
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+        - image: claudiambeke/inventory:0.1
+          name: inventory
+          # envFrom:
+          # - secretRef:
+          #     name: polls-secret
+          # - configMapRef:
+          #     name: polls-config
+          ports:
+            - containerPort: 8000
+              name: gunicorn
